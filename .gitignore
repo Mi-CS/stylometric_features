@@ -1,2 +1,4 @@
 .DS_Store
 prev/
+src/__pycache__/
+data/csCL2000.pkl
