@@ -1,3 +1,3 @@
 ### Datasets
 
-This folder contains the metadata in json format of the datasets employed.
+This folder contains the metadata of the datasets employed in json format.
