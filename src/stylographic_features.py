@@ -3,18 +3,41 @@ import re
 import scipy.stats as stat
 import nltk
 from collections import Counter
+from nltk.tokenize import word_tokenize
+from typing import Optional, List
 
 
-ALLOWED_SPECIAL_CHARS = r"(),.:;-–!?_'" + '"'
+ALLOWED_SPECIAL_CHARS = r"(),.:;-–!?_'" + r'"'
 POSSIBLE_TAGS = "CC CD DT EX FW IN JJ JJR JJS LS MD NN NNS NNP NNPS PDT POS PRP PRP$ RB RBR RBS RP TO UH VB VBG VBD VBN VBP VBZ WDT WP WP$ WRB . , : ( ) ''".split()
 
 
-def get_stylographic_feat(tokens_list): 
-    return np.concatenate((_lexical_features(tokens_list),
-                          _syntactic_features(tokens_list)))
+def get_stylographic_feat(tokenized_text: List[str],
+                          max_tokens: Optional[int] = None) -> np.ndarray: 
+    """
+    Takes a list of tokens and returns 
+    a numpy array of dimension 43 representing lexical and 
+    syntactic features
+
+    Parameters: 
+        tokenized_text (list(str)): tokenized text
+        max_tokens (int) [def. None]: maximum number of tokens to be considered
+            when computing the features. If None, use all tokens
+    Returns: 
+        feature_vector (numpy.ndarray): 43-dimensional numpy array containing 
+            stylographic features. 
+    """
+    tokenized_text = tokenized_text[:max_tokens] if max_tokens else tokenized_text
+
+    return np.concatenate((_lexical_features(tokenized_text),
+                          _syntactic_features(tokenized_text)))
 
 
 def _lexical_features(list_of_tokens): 
+
+    """
+    Returns a numpy.ndarray with several lexical features. 
+    """
+
     words_list = []
     sp_char_list = []
     for token in list_of_tokens: 
@@ -23,15 +46,19 @@ def _lexical_features(list_of_tokens):
         else:
             words_list.append(token)
     
-    n_tokens = len(list_of_tokens)
     n_words = len(words_list)
     v_words = len(set(words_list))
     word_lengths = np.array([len(word) for word in words_list])
-    avg_word_lengths = word_lengths.mean() # Average word length
-    std_word_lengths = word_lengths.std() # Standard deviation of word length
-    v_n_words = v_words/n_words # % distinct words in words
-    c_unique = Counter(words_list) # Counter of unique words
-    i_vi = Counter(c_unique.values()) # i_vi[i_times] = V_i 
+    # Average word length
+    avg_word_lengths = word_lengths.mean()
+    # Standard deviation of word length 
+    std_word_lengths = word_lengths.std() 
+    # % distinct words in words
+    v_n_words = v_words/n_words 
+    # Counter of unique words
+    c_unique = Counter(words_list) 
+    # i_vi[i_times] = V_i 
+    i_vi = Counter(c_unique.values()) 
     VR_K = 10**4 * sum([i**2 * i_vi[i] - n_words for i in i_vi]) / n_words**2
     VR_R = v_words/np.sqrt(n_words)
     VR_C = np.log(v_words) / np.log(n_words)
@@ -53,11 +80,17 @@ def _lexical_features(list_of_tokens):
                      entr, n_chars, freq_alpha, freq_sp, freq_common_punct])
 
 
-# nltk tags:
-# https://www.guru99.com/pos-tagging-chunking-nltk.html
-
 def _syntactic_features(list_of_tokens): 
+
+    """
+    Compute frequency of the POS tags in a list of tokens and
+    returns an numpy.ndarray with them. 
+    """
+
+    # Number of tokens for normalization
     n_tokens = len(list_of_tokens)
+
+    # Get and count pos tags
     tokens_tag = nltk.pos_tag(list_of_tokens)
     tag_dict = dict(zip(POSSIBLE_TAGS, [0]*len(POSSIBLE_TAGS)))
     for _, tag in tokens_tag: 
@@ -69,7 +102,8 @@ def _syntactic_features(list_of_tokens):
     # Normalize
     for token in tag_dict: 
         tag_dict[token] /= n_tokens
-            
+    
+    # Build entries 
     noun_freq = tag_dict["NN"] + tag_dict["NNS"]
     prop_noun_freq = tag_dict["NNP"] + tag_dict["NNPS"]
     pronoun_freq = tag_dict["PRP"] + tag_dict["PRP$"]
@@ -98,28 +132,28 @@ def _syntactic_features(list_of_tokens):
     sep_freq = tag_dict[":"]
     
     return np.array([noun_freq,
-    prop_noun_freq,
-    pronoun_freq,
-    ordinal_adj_freq,
-    comp_adj_freq, 
-    super_adj_freq,
-    adverb_freq, 
-    comp_adverb_freq,
-    super_adverb_freq, 
-    modal_freq, 
-    base_verb_freq, 
-    present_verb_freq, 
-    past_verb_freq,
-    pres_part_verb_freq,
-    particles_freq,
-    wh_freq, 
-    conj_freq, 
-    num_freq,
-    det_freq,
-    ex_freq,
-    to_freq ,
-    prepos_freq ,
-    genitive_freq,
-    quot_dot_freq, 
-    commas_freq,
-    sep_freq])
+        prop_noun_freq,
+        pronoun_freq,
+        ordinal_adj_freq,
+        comp_adj_freq, 
+        super_adj_freq,
+        adverb_freq, 
+        comp_adverb_freq,
+        super_adverb_freq, 
+        modal_freq, 
+        base_verb_freq, 
+        present_verb_freq, 
+        past_verb_freq,
+        pres_part_verb_freq,
+        particles_freq,
+        wh_freq, 
+        conj_freq, 
+        num_freq,
+        det_freq,
+        ex_freq,
+        to_freq ,
+        prepos_freq ,
+        genitive_freq,
+        quot_dot_freq, 
+        commas_freq,
+        sep_freq])
