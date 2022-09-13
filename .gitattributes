@@ -1,6 +1,6 @@
 # Trick to avoid github to account for the notebooks when calculating
 # percentage 
 
-notebooks/csCL_example.ipynb linguist-generated=true
+# notebooks/csCL_example.ipynb linguist-generated=true
 notebooks/gutenberg_example.ipynb linguist-generated=true
 notebooks/reuters_example.ipynb linguist-generated=true
