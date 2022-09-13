@@ -1,0 +1,4 @@
+# Trick to avoid github to account for the notebooks when calculating
+# percentage 
+
+notebooks/ linguist-generated=true
