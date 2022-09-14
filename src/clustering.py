@@ -26,10 +26,7 @@ class KMeansAuthors:
             author_labels (nump.ndarray): author to which each style vector
                 belongs to
         """
-
-        # Fit KMeans
         self.kmeans.fit(X)
-        # Identify clusters with authors
         predictions = self.kmeans.predict(X)
         self.identify_authors(predictions, author_labels)
     
@@ -98,7 +95,7 @@ class ModHausdorffDocument:
     """
     Compute the Modified Hausdorff distance between 
     every point cloud and cluster them using the 
-    specified method.
+    specified method. 
     """
 
     def __init__(self, n_authors: int) -> None:
@@ -108,7 +105,9 @@ class ModHausdorffDocument:
         self.best_score = 0
 
     def fit(self, X: np.ndarray, doc_lengths: np.ndarray, author_labels: np.ndarray) -> None: 
-
+        """
+        Compute the distance matrix and fit it 
+        """
         # Compute distance matrix and fit 
         distance_matrix = self.compute_distance_matrix(X, doc_lengths)
         self.method.fit(distance_matrix)
