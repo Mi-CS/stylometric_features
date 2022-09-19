@@ -52,5 +52,7 @@ As we took a subset of 14 papers with 3 main authors, we tried both, the single-
 <br> - **Single-author approach.** K-Means also fair poorly here, but with the *point_cloud* we are able to achieve 0.7% of overall accuracy. However, with a closer inspection, we see that one of the authors present a poor recall of 0.2, and a second one a precision of 0.56, leaving a lot of room for improvement. 
 <br> - **Multi-author approach.** Following the aforementioned approach, we obtain the following graph (see notebook for more details): 
 <br>
-![](figures/graph.png)
+<p align="middle">
+  <img src="figures/graph.png"/>
+ </p>
 <br> Each color is one main author, the node number indicates whether s/he is the first or second author of the paper, and the edge width is proportional to the number of close fragments between them. 
