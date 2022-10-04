@@ -49,7 +49,7 @@ For the 3-author subset, K-Means achieve 65% of accuracy, with two authors clear
 
 - **ArXiv cs.CL preprints** <br>
 As we took a subset of 14 papers with 3 main authors, we tried both, the single-author document and multi-author document approaches: 
-<br> - **Single-author approach.** K-Means also fair poorly here, but with the *point_cloud* we are able to achieve 0.7% of overall accuracy. However, with a closer inspection, we see that one of the authors present a poor recall of 0.2, and a second one a precision of 0.56, leaving a lot of room for improvement. 
+<br> - **Single-author approach.** K-Means also fair poorly here, but with the *point_cloud* we are able to achieve 70% of overall accuracy. However, with a closer inspection, we see that one of the authors present a poor recall of 0.2, and a second one a precision of 0.56, leaving a lot of room for improvement. 
 <br> - **Multi-author approach.** Following the aforementioned approach, we obtain the following graph (see notebook for more details): 
 <br>
 <p align="middle">
