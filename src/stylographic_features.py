@@ -57,15 +57,22 @@ def _lexical_features(list_of_tokens):
     v_n_words = v_words/n_words 
     # Counter of unique words
     c_unique = Counter(words_list) 
-    # i_vi[i_times] = V_i 
     i_vi = Counter(c_unique.values()) 
+    # Yule's characteristic
     VR_K = 10**4 * sum([i**2 * i_vi[i] - n_words for i in i_vi]) / n_words**2
+    # Guiraud's R
     VR_R = v_words/np.sqrt(n_words)
+    # Herdan's C
     VR_C = np.log(v_words) / np.log(n_words)
+    # Honore's H
     VR_H = (100 * np.log(n_words)) / ((1-i_vi[1])/v_words)
+    # Sichel's S
     VR_S = i_vi[2] / v_words
+    # Dugast's k
     VR_k = np.log(v_words) / np.log(np.log(n_words))
+    # Tuldava's LN
     VR_LN = (1-v_words**2) / (v_words**2 * np.log(n_words))
+    # Entropy
     entr = stat.entropy(list(c_unique.values()))
     
     full_string = " ".join(list_of_tokens)
