@@ -14,6 +14,8 @@ For the example, we chose Benjamin Kang Lim, Samuel Perry, and William Kazer. Th
 
 ## ArXiv cs.CL preprints
 
-The dataset has been built employing this [arXiv wrapper](https://github.com/Mi-CS/simple_arXiv). We searched for the manuscripts in the ``cs.CL`` category, and download them as `pdf`. As parser, [Apache Tika](https://tika.apache.org) was employed. For the current example, all 2021 manuscripts from Diptesh Kanojia, Hannes Westermann, and Bing Liu were chosen. 
+The dataset has been built employing this [arXiv wrapper](https://github.com/Mi-CS/simple_arXiv). We searched for the manuscripts in the ``cs.CL`` category, and download them as `pdf`. As parser, [Apache Tika](https://tika.apache.org) was employed. Metadata on the manuscripts and the download link can be found in `metadata_papers_csCL.json`. 
+
+For the current example, all 2021 manuscripts from Diptesh Kanojia, Hannes Westermann, and Bing Liu were chosen. 
 
 *Note that the cs.CL dataset must be re-built to run the examples presented in this repository.*
