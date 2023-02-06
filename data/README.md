@@ -1,7 +1,5 @@
 # Datasets
 
-This folder contains the subsample data for running the examples. 
-
 ## Gutenberg
 
 The R package [gutenbergr](https://cran.r-project.org/web/packages/gutenbergr/vignettes/intro.html) was employed for selecting the subset and downloading the text files. It was first filtered by books written only in English, and then by the 50 authors that had more books available for download. See `gutenberg_data_retrieval.R`. 
@@ -18,4 +16,4 @@ For the example, we chose Benjamin Kang Lim, Samuel Perry, and William Kazer. Th
 
 The dataset has been built employing this [arXiv wrapper](https://github.com/Mi-CS/simple_arXiv). We searched for the manuscripts in the ``cs.CL`` category, and download them as `pdf`. As parser, [Apache Tika](https://tika.apache.org) was employed. For the current example, all 2021 manuscripts from Diptesh Kanojia, Hannes Westermann, and Bing Liu were chosen. 
 
-*Note that the cs.Cl dataset must be re-built to run the examples presented in this repository.*
+*Note that the cs.CL dataset must be re-built to run the examples presented in this repository.*
