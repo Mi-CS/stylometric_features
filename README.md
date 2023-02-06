@@ -1,6 +1,6 @@
-# Stylometric-based authorship for single and multi-authored documents
+# Stylometry-based authorship for single and multi-authored documents
 
-We explore an stylometric-based feature-engineered approach for authorship classification in different datasets. For multi-author documents we employ the stylometric features to build a graph based on document-similarity, where documents that share similar style portions are linked. 
+We explore an stylometry-based feature-engineered approach for Authorship Analysis tasks in different datasets. For multi-author documents we employ the stylometric features to build a graph based on document-similarity, where documents that share similar style portions are linked. 
 
 ## Datasets
 
