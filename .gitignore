@@ -3,3 +3,4 @@ prev/
 src/__pycache__/
 data/csCL2000.pkl
 notebooks/pruebas.ipynb
+.vscode/
